@@ -1,71 +1,117 @@
-# jsmacros-intellisense README
+# JsMacros Intellisense
 
-This is the README for your extension "jsmacros-intellisense". After writing up a brief description, we recommend including the following sections.
+A Visual Studio Code extension that provides intelligent TypeScript type hints and autocompletion for [JsMacros](https://github.com/JsMacros/JsMacros) scripts.
+
+## Overview
+
+[JsMacros](https://github.com/JsMacros/JsMacros) is a Minecraft mod that allows you to write JavaScript/TypeScript macros to automate tasks in the game. This VS Code extension enhances your development experience by providing:
+
+- 📝 **IntelliSense support** - Get autocompletion and type hints while writing JsMacros scripts
+- 🔄 **Version management** - Download and switch between different JsMacros API versions
+- ⚙️ **Configurable** - Customize the extension to work with your specific JsMacros setup
+- 🎯 **TypeScript integration** - Seamless integration with VS Code's TypeScript language server
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+### Automatic Type Hints
 
-For example if there is an image subfolder under your extension project workspace:
+Once configured, the extension automatically provides type definitions for JsMacros APIs, enabling:
+- Autocomplete suggestions for JsMacros classes and methods
+- Parameter hints for function calls
+- Inline documentation from JsMacros TypeScript declarations
+- Type checking for your scripts
 
-\!\[feature X\]\(images/feature-x.png\)
+### Version Management Commands
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+Access all commands through the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`):
+
+- **`JsMacros Intellisense: fetch newest declarations`** - Download the latest JsMacros TypeScript declarations from GitHub
+- **`JsMacros Intellisense: fetch a specific declaration version`** - Download declarations for a specific JsMacros version
+- **`JsMacros Intellisense: change the declaration version for your current workspace`** - Switch between installed versions
+- **`JsMacros Intellisense: list all currently installed versions`** - View all downloaded declaration versions
+- **`JsMacros Intellisense: enable or disable type hints`** - Toggle IntelliSense on/off for the current workspace
+- **`JsMacros Intellisense: remove declarations for a specific version`** - Delete downloaded declarations to free up space
+
+## Installation
+
+1. Install the extension from the VS Code Marketplace or from a `.vsix` file
+2. Open a workspace where you write JsMacros scripts
+3. Run the command **`JsMacros Intellisense: fetch newest declarations`** to download the latest type definitions
+4. Start writing your JsMacros scripts with full IntelliSense support!
+
+## Configuration
+
+The extension contributes the following settings that can be configured in your VS Code settings:
+
+### `jsmacros-intellisense.repoUrl`
+- **Type:** `string`
+- **Default:** `"https://github.com/JsMacros/JsMacros"`
+- **Description:** URL to the JsMacros GitHub repository. This is used to fetch TypeScript declarations from releases.
+- **Pattern:** Must be a valid GitHub repository URL (`https://github.com/{owner}/{repo}`)
+
+### `jsmacros-intellisense.assetRegExp`
+- **Type:** `string`
+- **Default:** `"^typescript"`
+- **Description:** Regular expression to filter release assets. Used to identify which release asset contains the TypeScript declarations.
+
+### `jsmacros-intellisense.enabledByDefault`
+- **Type:** `boolean`
+- **Default:** `true`
+- **Description:** Whether type hints should be loaded by default when opening a workspace.
+
+## Usage
+
+### Getting Started
+
+1. **Install the extension** and open your JsMacros scripts workspace
+2. **Fetch declarations:** Run `JsMacros Intellisense: fetch newest declarations` from the Command Palette
+3. **Start coding:** Create or open a `.js` or `.ts` file and start writing JsMacros code
+4. **Enjoy IntelliSense:** Type hints and autocompletion will appear automatically as you type
+
+### Switching Versions
+
+If you need to work with a specific version of JsMacros:
+
+1. Run `JsMacros Intellisense: fetch a specific declaration version`
+2. Select the version you need from the GitHub releases
+3. Run `JsMacros Intellisense: change the declaration version for your current workspace`
+4. Select the newly downloaded version
+
+### Managing Storage
+
+Downloaded declarations are stored globally. To free up space:
+
+1. Run `JsMacros Intellisense: list all currently installed versions` to see what's installed
+2. Run `JsMacros Intellisense: remove declarations for a specific version` to delete unused versions
 
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+- Visual Studio Code version 1.107.0 or higher
+- Internet connection to download TypeScript declarations from GitHub
 
-## Extension Settings
+## How It Works
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+This extension uses a TypeScript server plugin to inject JsMacros type definitions into your workspace. When you fetch declarations:
 
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+1. The extension downloads the TypeScript declarations package from the JsMacros GitHub releases
+2. Declarations are extracted and stored in VS Code's global storage
+3. The TypeScript server plugin loads these declarations
+4. IntelliSense becomes available for JsMacros APIs in your scripts
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+- Type hints are workspace-specific. You'll need to enable/configure the extension for each workspace
+- Switching versions requires reloading the TypeScript server (usually automatic)
 
-## Release Notes
+## Contributing
 
-Users appreciate release notes as you update your extension.
+Found a bug or have a feature request? Please open an issue on the [GitHub repository](https://github.com/u9g/jsmacros-intellisense).
 
-### 1.0.0
+## License
 
-Initial release of ...
+This extension is open source. Check the repository for license details.
 
-### 1.0.1
+## Links
 
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+- [JsMacros GitHub Repository](https://github.com/JsMacros/JsMacros)
+- [Report Issues](https://github.com/u9g/jsmacros-intellisense/issues)
