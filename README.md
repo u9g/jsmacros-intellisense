@@ -114,5 +114,4 @@ This extension is open source. Check the repository for license details.
 ## Links
 
 - [JsMacros GitHub Repository](https://github.com/JsMacros/JsMacros)
-- [JsMacros Documentation](https://github.com/JsMacros/JsMacros)
 - [Report Issues](https://github.com/u9g/jsmacros-intellisense/issues)
